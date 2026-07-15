@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Kids Typing Academy"
+version = "1.0.0"
+id = "artifacts/kids-typing-academy"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22951
+
+[services.development]
+run = "pnpm --filter @workspace/kids-typing-academy run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/kids-typing-academy", "run", "build" ]
+publicDir = "artifacts/kids-typing-academy/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22951"
+BASE_PATH = "/"
